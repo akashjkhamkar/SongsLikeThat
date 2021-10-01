@@ -5,7 +5,7 @@ const clientId = "28e7d1cab8f8410fa52de2cdf79ee154"
 const secret = "4595a1242a174cf3ae5deb9eeedf5391"
 let token = null
 
-const searchUrl = (query) => `https://api.spotify.com/v1/search?q=${query}&type=track%2Cartist&market=US&limit=7`;
+const searchUrl = (query) => `https://api.spotify.com/v1/search?q=${query}&type=track%2Cartist&market=US&limit=15`;
 
 const init = async () => {
     const res = await axios({

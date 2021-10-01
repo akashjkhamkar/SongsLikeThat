@@ -29,7 +29,7 @@ const App = () => {
           const link = song.external_urls.spotify
           const artist = song.artists[0].name
           const id = song.id
-          const img = song.album.images[2].url;
+          const img = song.album.images[1].url;
           
           return {name, link, artist, id, img}
       })

@@ -1,0 +1,3 @@
+GET https://api.spotify.com/v1/search?q=john mayer gravity&type=track&market=US&limit=5
+Content-Type: application/json
+Authorization: Bearer BQDd1zyTKyzpIW0DXGLaIVy8Zqiq6wsGEmBEZsbnR4tRoeRhubWW2WnMfMamOO6m02HJqRrDpgiUjdw33zidVDWzn7HYE77bGGyDR0eO3jezT3cOu0cuCfcBle6aRc3Lxm81Mnm47TV-oZbtfq39ZPuTDPssPBPGy8-rCJxe

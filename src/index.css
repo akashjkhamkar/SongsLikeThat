@@ -6,9 +6,18 @@
     align-items: center;
 }
 
-.tracks{
-    justify-content: center;
+.searchComponent{
+    visibility: hidden;
+}
+
+.grid{
+    justify-content: space-between;
 }
 .card {
     width: 350px;
+    height: 150px;
+}
+
+.selectedGrid{
+    
 }

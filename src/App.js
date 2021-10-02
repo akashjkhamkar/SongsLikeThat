@@ -94,6 +94,20 @@ const App = () => {
   return (
     <Container>
       <Form handleSearch={handleSearch} search={search} setSearch={setSearch} loading={loading} setLoading={setLoading}/> 
+
+      <Accordion expanded={true} onChange={handlePanel("panel2")}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Selected artists / tracks</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} artists={artists} setArtist={setArtist}/>
+        </AccordionDetails>
+      </Accordion>
+
       <Accordion expanded={searchWindow === "panel1"} onChange={handlePanel("panel1")}>
 
         <AccordionSummary
@@ -108,19 +122,6 @@ const App = () => {
           <SearchResult query={search} songs={songs} artists={artists} addtoMix={addtoMix}/>
         </AccordionDetails>
 
-      </Accordion>
-
-      <Accordion expanded={searchWindow === "panel2"} onChange={handlePanel("panel2")}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Selected artists / tracks</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} artists={artists} setArtist={setArtist}/>
-        </AccordionDetails>
       </Accordion>
 
       <Suggestions mix={mix}/>

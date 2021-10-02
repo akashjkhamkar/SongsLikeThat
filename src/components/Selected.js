@@ -6,7 +6,7 @@ const Selected = ({mix, setMix, songs, setSongs,  artists, setArtist}) => {
 
     if(mix.length === 0){
         return (
-            <Typography component="div" variant="h5">No tracks or artists selected, first search and then select</Typography>
+            <Typography component="div" variant="h5">No tracks or artists selected</Typography>
         )
     }
 

@@ -94,7 +94,7 @@ const App = () => {
       </Paper>
 
       <Paper>
-          <SearchResult mix={mix} query={search} songs={songs} artists={artists} addtoMix={addtoMix}/>
+          <SearchResult mix={mix} query={search} songs={songs} artists={artists} addtoMix={addtoMix} loading={loading}/>
       </Paper>         
 
       <Suggestions mix={mix}/>

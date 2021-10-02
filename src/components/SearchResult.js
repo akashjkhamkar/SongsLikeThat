@@ -3,10 +3,10 @@ import { useState } from "react"
 import { Box, Tabs, AppBar, Tab } from "@mui/material"
 import Cards from "./Cards";
 
-const SearchResult = ({ mix, query, songs, artists, addtoMix }) => {
+const SearchResult = ({ mix, query, songs, artists, addtoMix, loading }) => {
     const [tab, setTab] = useState(0);
 
-    if(!query){
+    if(!query || loading){
       return null
     }else if(songs.length === 0){
       return "not found"

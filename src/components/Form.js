@@ -16,7 +16,7 @@ const Form = ({ setSearch, loading, setLoading }) => {
     }
 
     return (
-        <form className="form">
+        <form className="form" onSubmit={(e) => e.preventDefault()}>
           <TextField onChange={(e) => handleSearch(e.target.value)} name="search" label="search songs / artists" variant="standard" required/>
           {loading ? <CircularProgress/> : null }
         </form>

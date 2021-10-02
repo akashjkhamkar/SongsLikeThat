@@ -2,16 +2,24 @@ import { useState } from "react"
 
 import { Box, Tabs, AppBar, Tab } from "@mui/material"
 import Cards from "./Cards";
-import Typography from '@mui/material/Typography';
 
-const SearchResult = ({ songs, artists, addtoMix }) => {
+const SearchResult = ({ mix, query, songs, artists, addtoMix }) => {
     const [tab, setTab] = useState(0);
-  
-    if(songs.length === 0){
-      return (
-          <Typography component="div" variant="h5">Search something !</Typography>
-      )
+
+    if(!query){
+      return null
+    }else if(songs.length === 0){
+      return "not found"
     }
+
+
+    mix.forEach(e => {
+      if(e.type === "song"){
+        songs = songs.map(s => e.data.id === s.id ? {...s, added: true} : s)
+      }else{
+        artists = artists.map(s => e.data.id === s.id ? {...s, added: true} : s)
+      }
+    })
 
     return (
       <Box className="searchComponent">

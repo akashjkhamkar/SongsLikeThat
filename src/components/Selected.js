@@ -5,9 +5,7 @@ import Typography from '@mui/material/Typography';
 const Selected = ({mix, setMix, songs, setSongs,  artists, setArtist}) => {
 
     if(mix.length === 0){
-        return (
-            <Typography component="div" variant="h5">No tracks or artists selected</Typography>
-        )
+        return null
     }
 
     const removeFromMix = (id) => {
@@ -25,6 +23,7 @@ const Selected = ({mix, setMix, songs, setSongs,  artists, setArtist}) => {
 
     return (
         <div>
+            <Typography variant="h3">Selected songs and artists</Typography>
             <Grid spacing={3} container className="selectedGrid">
             {
             mix.map(item =>

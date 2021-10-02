@@ -1,21 +1,24 @@
+import { useState } from "react"
 import { TextField } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search'
-import { IconButton } from "@mui/material"
 import CircularProgress from '@mui/material/CircularProgress';
 
-const Form = ({handleSearch, search, setSearch, loading, setLoading }) => {
-    const handleSearch2 = (e) => {
+const Form = ({ setSearch, loading, setLoading }) => {
+    const [timerID, setTimerID] = useState(null)
+  
+    const handleSearch = (query) => {
+      if(timerID){
+        clearTimeout(timerID)
+      }
+
+      const id = setTimeout(() => {setSearch(query)}, 500)
+      setTimerID(id)
       setLoading(true);
-      handleSearch(e);
     }
 
     return (
-        <form className="form" onSubmit={handleSearch2}>
-          <TextField value={search} onChange={(e) => setSearch(e.target.value)} name="search" label="search songs / artists" variant="standard" required/>
-            {loading ? <CircularProgress/> : 
-            <IconButton type="submit" variant="contained" className="searchButton">
-              <SearchIcon/>
-            </IconButton>}
+        <form className="form">
+          <TextField onChange={(e) => handleSearch(e.target.value)} name="search" label="search songs / artists" variant="standard" required/>
+          {loading ? <CircularProgress/> : null }
         </form>
     )
 }

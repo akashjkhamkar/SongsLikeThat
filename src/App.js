@@ -9,15 +9,18 @@ import Form from "./components/Form";
 import SearchResult from "./components/SearchResult";
 import Selected from "./components/Selected"
 import Suggestions from "./components/Suggestions";
-
+import Notification from "./components/Notification"
 import { Paper } from "@mui/material";
 
 const App = () => {
   const [search, setSearch] = useState("")
-  let [songs, setSongs] = useState([])
-  let [artists, setArtist] = useState([])
+  const [songs, setSongs] = useState([])
+  const [artists, setArtist] = useState([])
   const [mix, setMix] = useState([])
   const [loading, setLoading] = useState(true)
+  const [results, setResults] = useState([])
+  const [notification, setNotification] = useState("")
+  const [timerID, setTimerID] = useState("")
 
   useEffect(() => {
     spotifyService.init()
@@ -70,15 +73,33 @@ const App = () => {
 
   }, [search])
 
+  const notify = (msg) => {
+    if(timerID){
+      clearTimeout(timerID)
+    }
+
+    setNotification(msg)
+
+    const id = setTimeout(() => {
+      setNotification("")
+    }, 4000)
+
+    setTimerID(id)
+    window.scrollTo({top:0, behavior: "smooth"})
+  }
+
   const addtoMix = (id, type) => {
+    if(mix.length === 5){
+      notify("Only 5 seeds (artists / songs can be) selected !")
+      return
+    }
+
     const obj = {type}
     let original = null
     if(type === "song"){
-      original = {...songs.find(song => song.id === id), added: true}
-      setSongs(songs.map(song => song.id === id ? original : song))
+      original = songs.find(song => song.id === id)
     }else{
-      original = {...artists.find(artist => artist.id === id), added: true}
-      setArtist(artists.map(artist => artist.id === id ? original : artist))
+      original = artists.find(artist => artist.id === id)
     }
 
     obj.data = original
@@ -87,17 +108,18 @@ const App = () => {
 
   return (
     <Container>
+      <Notification className="notification" notification={notification}/>
       <Form search={search} setSearch={setSearch} loading={loading} setLoading={setLoading}/> 
 
-      <Paper>
-          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} artists={artists} setArtist={setArtist}/>
+      <Paper className="searchComponentContainer">
+          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} setResults={setResults} artists={artists} setArtist={setArtist}/>
       </Paper>
 
       <Paper>
           <SearchResult mix={mix} query={search} songs={songs} artists={artists} addtoMix={addtoMix} loading={loading}/>
       </Paper>         
 
-      <Suggestions mix={mix}/>
+      <Suggestions mix={mix} results={results} />
     </Container>
   );
 }

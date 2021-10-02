@@ -12,7 +12,6 @@ const SearchResult = ({ mix, query, songs, artists, addtoMix, loading }) => {
       return "not found"
     }
 
-
     mix.forEach(e => {
       if(e.type === "song"){
         songs = songs.map(s => e.data.id === s.id ? {...s, added: true} : s)

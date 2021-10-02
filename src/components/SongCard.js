@@ -10,8 +10,8 @@ const SongCard = ({id, name, artist, img, addtoMix, added}) => {
             alt="album cover"
           />
   
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <CardContent sx={{ flex: '1 0 auto'}}>
               <Typography className="cardName" component="div" variant="h6">
                 {name}
               </Typography>

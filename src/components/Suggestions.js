@@ -1,13 +1,22 @@
 import { useState } from "react";
 import spotifyService from "../services/spotifyApi"
 
-import {Grid} from "@mui/material"
-import SuggestedCard from "./SuggestedCard"
+import { Button, Typography } from "@mui/material";
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 
 const Suggestions = ({mix}) => {
-    const [visible, setVisible] = useState(false)
     const [results, setResults] = useState([])
     
+    if(mix.length === 0){
+        return null;
+    }
+
     const generate = async () => {
         const res = await spotifyService.recommend(mix)
         console.log(res);
@@ -22,23 +31,28 @@ const Suggestions = ({mix}) => {
             return {name, link, artist, id, img, added}
         })
         setResults(allSongs)
-        setVisible(true)
-    }
-
-    if(!visible){
-        return <button onClick={generate}>generate</button>
     }
 
     return(
-        <Grid spacing={3} container className="suggestedGrid">
-        {
-        results.map(item =>
-            <Grid item key={item.id}>
-            <SuggestedCard id={item.id} name={item.name} artist={item.artist} img={item.img}/>
-            </Grid>)
-        }
-        </Grid>
-
+        <div>
+            <Typography component="div" variant="h3">Playlist made for you</Typography>
+            <Typography component="div" color="text.secondary" variant="h5">( Based on {mix.map(e=>e.data.name).join(',')})</Typography>
+            <Button variant="contained" onClick={generate}>
+                Generate
+                <QueueMusicIcon></QueueMusicIcon> 
+                </Button>
+            
+            <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                {results.map(e =>
+                <ListItem key={e.id}>
+                    <ListItemAvatar>
+                        <Avatar variant="square" alt="img" src={e.img} />
+                    </ListItemAvatar>
+                    <ListItemText primary={e.name} secondary={e.artist} />
+                </ListItem>
+                )}
+            </List>
+        </div>
     )
 }
 

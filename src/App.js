@@ -22,6 +22,8 @@ const App = () => {
   const [artists, setArtist] = useState([])
   const [mix, setMix] = useState([])
 
+  const [searchWindow, setSearchWindow] = useState(false)
+
   useEffect(() => {
     spotifyService.init()
   }, [])
@@ -34,7 +36,9 @@ const App = () => {
       }
       // setting songs
       const allSongs = res.tracks.items.map(song => {
-          const name = song.name.substring(0,35)
+          let name = song.name
+          // let name = song.name.substring(0,35)
+
           const link = song.external_urls.spotify
           const artist = song.artists[0].name
           const id = song.id
@@ -59,7 +63,8 @@ const App = () => {
 
         return obj
       })
-  
+      
+      setSearchWindow(true)
       setSongs(allSongs)
       setArtist(allArtists)
   }
@@ -80,15 +85,11 @@ const App = () => {
     setMix(mix.concat(obj))
   }
 
-  const recommend = async () => {
-      const res = await spotifyService.recommend(mix)
-      console.log(res)
-  }
-
   return (
     <Container>
       <Form handleSearch={handleSearch} search={search} setSearch={setSearch} /> 
-      {/* <Accordion>
+      <Accordion expanded={searchWindow} onChange={() => setSearchWindow(!searchWindow)}>
+
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -96,42 +97,26 @@ const App = () => {
         >
           <Typography>Search Results</Typography>
         </AccordionSummary>
+
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <SearchResult query={search} songs={songs} artists={artists} addtoMix={addtoMix}/>
         </AccordionDetails>
+
       </Accordion>
+
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Accordion 2</Typography>
+          <Typography>Selected artists / tracks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} artists={artists} setArtist={setArtist}/>
         </AccordionDetails>
       </Accordion>
-      <Accordion disabled>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
-        >
-          <Typography>Disabled Accordion</Typography>
-        </AccordionSummary>
-      </Accordion> */}
-      
-      <SearchResult query={search} songs={songs} artists={artists} addtoMix={addtoMix}/>
-      <hr></hr>
-      <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} artists={artists} setArtist={setArtist}/>
-      <hr></hr>
+
       <Suggestions mix={mix}/>
     </Container>
   );

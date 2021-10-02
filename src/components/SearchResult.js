@@ -2,9 +2,16 @@ import { useState } from "react"
 
 import { Box, Tabs, AppBar, Tab } from "@mui/material"
 import Cards from "./Cards";
+import Typography from '@mui/material/Typography';
 
 const SearchResult = ({ songs, artists, addtoMix }) => {
     const [tab, setTab] = useState(0);
+  
+    if(songs.length === 0){
+      return (
+          <Typography component="div" variant="h5">Search something !</Typography>
+      )
+    }
 
     return (
       <Box className="searchComponent">
@@ -22,7 +29,8 @@ const SearchResult = ({ songs, artists, addtoMix }) => {
         <Cards items={songs} addtoMix={addtoMix} className="grid"/>
         : <Cards items={artists} addtoMix={addtoMix} className="grid"/>}
         
-      </Box>
+     
+      </Box> 
     )
 }
 

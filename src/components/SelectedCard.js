@@ -1,5 +1,8 @@
 import { Box, Card, CardContent, Typography, CardMedia } from "@mui/material"
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from "@mui/material"
+
 const SelectedCard = ({id, name, artist, img, removeFromMix}) => {
     return (
       <Card className="card" sx={{ display: 'flex' }}>
@@ -12,6 +15,11 @@ const SelectedCard = ({id, name, artist, img, removeFromMix}) => {
   
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flex: '1 0 auto' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+              <IconButton>
+                <DeleteIcon onClick={() => removeFromMix(id)}>remove</DeleteIcon>
+              </IconButton>
+            </Box>
               <Typography className="cardName" component="div" variant="h6">
                 {name}
               </Typography>
@@ -21,9 +29,6 @@ const SelectedCard = ({id, name, artist, img, removeFromMix}) => {
               </Typography>
             </CardContent>
             
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-                <button onClick={() => removeFromMix(id)}>remove</button>
-            </Box>
           </Box>
           
     </Card>)

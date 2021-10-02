@@ -1,11 +1,18 @@
 import {Grid} from "@mui/material"
 import SelectedCard from "./SelectedCard"
+import Typography from '@mui/material/Typography';
 
 const Selected = ({mix, setMix, songs, setSongs,  artists, setArtist}) => {
 
+    if(mix.length === 0){
+        return (
+            <Typography component="div" variant="h5">No tracks or artists selected, first search and then select</Typography>
+        )
+    }
+
     const removeFromMix = (id) => {
         const obj = mix.find(e => e.data.id === id)
-        setMix(mix.filter(e => e.id !== id))
+        setMix(mix.filter(e => e.data.id !== id))
 
         obj.data.added = false;
 
@@ -18,12 +25,11 @@ const Selected = ({mix, setMix, songs, setSongs,  artists, setArtist}) => {
 
     return (
         <div>
-            Selected songs and artists 
             <Grid spacing={3} container className="selectedGrid">
             {
             mix.map(item =>
                 <Grid item key={item.data.id}>
-                <SelectedCard id={item.data.id} name={item.data.name} artist={!item.data.artist ? null : item.artist} img={item.data.img} removeFromMix={removeFromMix}/>
+                <SelectedCard id={item.data.id} name={item.data.name} artist={!item.data.artist ? null : item.data.artist} img={item.data.img} removeFromMix={removeFromMix}/>
                 </Grid>)
             }
             </Grid>

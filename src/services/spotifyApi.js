@@ -77,4 +77,5 @@ const recommend = async (mix) => {
     return res.data
 }
 
-export default { search, init, recommend }
+const obj = { search, init, recommend }
+export default obj

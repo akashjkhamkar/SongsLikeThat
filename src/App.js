@@ -23,7 +23,7 @@ const App = () => {
   const [mix, setMix] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const [searchWindow, setSearchWindow] = useState(false)
+  const [searchWindow, setSearchWindow] = useState("panel1")
 
   useEffect(() => {
     spotifyService.init()
@@ -67,7 +67,7 @@ const App = () => {
       })
       
       setLoading(false)
-      setSearchWindow(true)
+      setSearchWindow("panel1")
       setSongs(allSongs)
       setArtist(allArtists)
   }
@@ -84,14 +84,17 @@ const App = () => {
     }
 
     obj.data = original
-    
     setMix(mix.concat(obj))
+  }
+
+  const handlePanel = (panel) => (event, newExpanded) => {
+    setSearchWindow(newExpanded ? panel : false);
   }
 
   return (
     <Container>
       <Form handleSearch={handleSearch} search={search} setSearch={setSearch} loading={loading} setLoading={setLoading}/> 
-      <Accordion expanded={searchWindow} onChange={() => setSearchWindow(!searchWindow)}>
+      <Accordion expanded={searchWindow === "panel1"} onChange={handlePanel("panel1")}>
 
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -107,7 +110,7 @@ const App = () => {
 
       </Accordion>
 
-      <Accordion>
+      <Accordion expanded={searchWindow === "panel2"} onChange={handlePanel("panel2")}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"

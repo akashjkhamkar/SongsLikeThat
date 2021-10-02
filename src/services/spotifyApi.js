@@ -21,7 +21,6 @@ const init = async () => {
     })
 
     token = res.data.access_token
-    console.log(res, token)
 }
 
 const search = async (query) => {

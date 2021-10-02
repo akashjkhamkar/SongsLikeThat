@@ -16,3 +16,12 @@ html {
 .card {
     overflow:hidden;
 }
+
+.searchButton{
+    background: black;
+}
+
+.suggestionsText{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

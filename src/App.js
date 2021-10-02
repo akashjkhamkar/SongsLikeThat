@@ -21,11 +21,13 @@ const App = () => {
   const [songs, setSongs] = useState([])
   const [artists, setArtist] = useState([])
   const [mix, setMix] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const [searchWindow, setSearchWindow] = useState(false)
 
   useEffect(() => {
     spotifyService.init()
+    setLoading(false)
   }, [])
 
   const handleSearch = async (e) => {
@@ -64,6 +66,7 @@ const App = () => {
         return obj
       })
       
+      setLoading(false)
       setSearchWindow(true)
       setSongs(allSongs)
       setArtist(allArtists)
@@ -87,7 +90,7 @@ const App = () => {
 
   return (
     <Container>
-      <Form handleSearch={handleSearch} search={search} setSearch={setSearch} /> 
+      <Form handleSearch={handleSearch} search={search} setSearch={setSearch} loading={loading} setLoading={setLoading}/> 
       <Accordion expanded={searchWindow} onChange={() => setSearchWindow(!searchWindow)}>
 
         <AccordionSummary

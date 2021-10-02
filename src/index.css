@@ -31,7 +31,7 @@ html {
 }
 
 .searchComponentContainer{
-    padding: 10px;
+    display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -42,4 +42,5 @@ html {
     justify-content: space-evenly;
     align-items: flex-start;
     gap: 30px;
+    padding: 10px;
 }

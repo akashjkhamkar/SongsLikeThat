@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
 html {
     overflow-x: initial !important;
+}
+
+.boldText{
+    font-family: 'Signika', sans-serif;
 }
 
 .form {

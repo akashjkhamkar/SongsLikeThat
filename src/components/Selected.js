@@ -43,13 +43,15 @@ const Selected = ({mix, setMix, songs, setSongs, setResults, artists, setArtist}
 
     return (
         <div className="selectedDiv">
-            <Typography variant="h3">Selected songs and artists</Typography>
+            <Typography variant="h3">
+                <span className="boldText">Selected songs and artists</span>
+                </Typography>
             
             <Grid spacing={3} container className="selectedGrid">
             {
                 mix.map(item =>
-                    <Grid item key={item.data.id}>
-                <SelectedCard id={item.data.id} name={item.data.name} artist={!item.data.artist ? null : item.data.artist} img={item.data.img} removeFromMix={removeFromMix}/>
+                <Grid item key={item.data.id}>
+                    <SelectedCard id={item.data.id} name={item.data.name} artist={!item.data.artist ? null : item.data.artist} img={item.data.img} removeFromMix={removeFromMix}/>
                 </Grid>)
             }
             </Grid>

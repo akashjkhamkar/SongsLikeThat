@@ -17,7 +17,7 @@ const Suggestions = ({mix, results, setResults}) => {
     return(
         <div>
             <div className="suggestionsText">
-                <Typography component="div" variant="h3">Playlist made for you</Typography>
+                <Typography component="div" variant="h3"><span className="boldText">Playlist made for you</span></Typography>
                 <Typography component="div" color="text.secondary" variant="h5">( Based on {mix.map(e=>e.data.name).join(',')})</Typography>
             </div>
 

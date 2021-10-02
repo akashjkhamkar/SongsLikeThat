@@ -11,6 +11,7 @@ const Selected = ({mix, setMix, songs, setSongs, setResults, artists, setArtist}
     }
 
     const removeFromMix = (id) => {
+        setResults([])
         const obj = mix.find(e => e.data.id === id)
         setMix(mix.filter(e => e.data.id !== id))
 

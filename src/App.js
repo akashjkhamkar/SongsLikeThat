@@ -94,6 +94,7 @@ const App = () => {
       return
     }
 
+    setResults([])
     const obj = {type}
     let original = null
     if(type === "song"){
@@ -112,14 +113,14 @@ const App = () => {
       <Form search={search} setSearch={setSearch} loading={loading} setLoading={setLoading}/> 
 
       <Paper className="searchComponentContainer">
-          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} setResults={setResults} artists={artists} setArtist={setArtist}/>
+          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} setResults={setResults} artists={artists} setArtist={setArtist} setResults={setResults}/>
       </Paper>
 
       <Paper>
           <SearchResult mix={mix} query={search} songs={songs} artists={artists} addtoMix={addtoMix} loading={loading}/>
       </Paper>         
 
-      <Suggestions mix={mix} results={results} />
+      <Suggestions mix={mix} results={results}/>
     </Container>
   );
 }

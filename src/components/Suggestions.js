@@ -7,9 +7,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import ListItemButton from '@mui/material/ListItemButton';
 
-const Suggestions = ({mix, results}) => {
+const Suggestions = ({mix, results, setResults}) => {
     if(results.length === 0){
         return null;
+    }else if(mix.length === 0){
+        setResults([])
     }
 
     return(

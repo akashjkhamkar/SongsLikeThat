@@ -108,12 +108,12 @@ const App = () => {
   }
 
   return (
-    <Container>
+    <Container className="megaContainer">
       <Notification className="notification" notification={notification}/>
       <Form search={search} setSearch={setSearch} loading={loading} setLoading={setLoading}/> 
 
       <Paper className="searchComponentContainer">
-          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} setResults={setResults} artists={artists} setArtist={setArtist} setResults={setResults}/>
+          <Selected mix={mix} setMix={setMix} songs={songs} setSongs={setSongs} setResults={setResults} artists={artists} setArtist={setArtist}/>
       </Paper>
 
       <Paper>

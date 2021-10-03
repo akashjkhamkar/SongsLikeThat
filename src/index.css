@@ -1,6 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
+
+html, body{
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+    width: 100%;
+}
+
 html {
     overflow-x: initial !important;
+    background: url("https://unsplash.com/photos/DrVRPxb0UDU/download?force=true&w=1920") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .boldText{
@@ -48,4 +61,8 @@ html {
     align-items: flex-start;
     gap: 30px;
     padding: 10px;
+}
+
+.megaContainer{
+    margin-top: 30px;
 }

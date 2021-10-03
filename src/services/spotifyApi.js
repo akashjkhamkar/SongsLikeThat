@@ -8,19 +8,22 @@ let token = null
 const searchUrl = (query) => `https://api.spotify.com/v1/search?q=${query}&type=track%2Cartist&market=US&limit=15`;
 
 const init = async () => {
-    const res = await axios({
-        method: 'post',
-        url: 'https://accounts.spotify.com/api/token',
-        data: QueryString.stringify({
-            grant_type: "client_credentials"
-       }),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
-        }
-    })
-
-    token = res.data.access_token
+    try{
+        const res = await axios({
+            method: 'post',
+            url: 'https://accounts.spotify.com/api/token',
+            data: QueryString.stringify({
+                grant_type: "client_credentials"
+           }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              Authorization: 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
+            }
+        })
+        token = res.data.access_token
+    }catch(e){
+        alert("something went wrong, contact the dev")
+    }
 }
 
 const search = async (query) => {
@@ -29,13 +32,21 @@ const search = async (query) => {
         console.log("no token")
         return
     }
-    const res = await axios.get(searchUrl(query), {
-        "headers":{
-            "Authorization" : `Bearer ${token}`
-        }
-    })
 
-    return res.data
+    try{
+        const res = await axios.get(searchUrl(query), {
+            "headers":{
+                "Authorization" : `Bearer ${token}`
+            }
+        })
+        return res.data
+    }catch(e){
+        if(e.response.data.error.message === "The access token expired"){
+            await init()
+            return await search(query)
+        }
+    }
+
 }
 
 const recommend = async (mix) => {
@@ -68,13 +79,21 @@ const recommend = async (mix) => {
         url += seed_artists
     }
 
-    const res = await axios.get(url, {
-        "headers":{
-            "Authorization" : `Bearer ${token}`
-        }
-    })
 
-    return res.data
+    try{
+        const res = await axios.get(url, {
+            "headers":{
+                "Authorization" : `Bearer ${token}`
+            }
+        })
+        return res.data
+    }catch(e){
+        if(e.response.data.error.message === "The access token expired"){
+            await init()
+            await recommend(mix)
+        }
+    }
+
 }
 
 const obj = { search, init, recommend }

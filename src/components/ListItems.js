@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 
-const Cards = ({items, addtoMix, className}) => {
+const ListItems = ({items, addtoMix, className}) => {
 return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {items.map(e => 
@@ -28,4 +28,4 @@ return (
     )
 }
   
-export default Cards;
+export default ListItems;

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Box, Tabs, AppBar, Tab } from "@mui/material"
-import Cards from "./Cards";
+import ListItems from "./ListItems";
 
 import { notify } from "../reducers/notification";
 import { actionResetResults } from "../reducers/results";
@@ -56,8 +56,8 @@ const SearchResult = () => {
         </AppBar>
 
         {tab === 0 ? 
-        <Cards items={songs} addtoMix={addtoMix} className="grid"/>
-        : <Cards items={artists} addtoMix={addtoMix} className="grid"/>}
+        <ListItems items={songs} addtoMix={addtoMix} className="grid"/>
+        : <ListItems items={artists} addtoMix={addtoMix} className="grid"/>}
         
      
       </Box> 

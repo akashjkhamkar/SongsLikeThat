@@ -4,39 +4,43 @@ import SelectedCard from "./SelectedCard"
 import Typography from '@mui/material/Typography';
 import spotifyService from "../services/spotifyApi"
 
-const Selected = ({mix, setMix, songs, setSongs, setResults, artists, setArtist}) => {
+import { useDispatch, useSelector } from 'react-redux'
+import { songsinitAction } from "../reducers/songs"
+import { artistinitAction } from "../reducers/artists"
+import { actionResetResults, actionUpdateResults } from "../reducers/results";
+import { removeMix } from "../reducers/mix";
+
+import { itemArray } from "../utils/utils";
+
+const Selected = () => {
+    const dispatch = useDispatch()
+    const songs = useSelector(state => state.songs)
+    const artists = useSelector(state => state.artists)
+    const mix = useSelector(state => state.mix)
 
     if(mix.length === 0){
         return null
     }
 
     const removeFromMix = (id) => {
-        setResults([])
-        const obj = mix.find(e => e.data.id === id)
-        setMix(mix.filter(e => e.data.id !== id))
+        const obj = mix.find(e => e.id === id)
+    
+        dispatch(removeMix(id))
+        dispatch(actionResetResults())
 
-        obj.data.added = false;
+        obj.added = false;
 
         if(obj.type === "song"){
-            setSongs(songs.map(e => e.id === id ? obj.data : e))
+            dispatch(songsinitAction(songs.map(e => e.id === id ? obj : e)))
         }else{
-            setArtist(artists.map(e => e.id === id ? obj.data : e))
+            dispatch(artistinitAction(artists.map(e => e.id === id ? obj : e)))
         }
     }
 
     const generate = async () => {
         const res = await spotifyService.recommend(mix)
-        const allSongs = res.tracks.map(song => {
-            const name = song.name.substring(0,35)
-            const link = song.external_urls.spotify
-            const artist = song.artists[0].name
-            const id = song.id
-            const img = song.album.images[1].url;
-            const added = mix.find(e => e.data.id === id) != null;
-        
-            return {name, link, artist, id, img, added}
-        })
-        setResults(allSongs)
+        const allSongs = itemArray(res.tracks, "song")
+        dispatch(actionUpdateResults(allSongs))
         document.querySelector(".playlist").scrollIntoView({ behavior: 'smooth' })
     }
 
@@ -50,8 +54,8 @@ const Selected = ({mix, setMix, songs, setSongs, setResults, artists, setArtist}
             <Grid spacing={3} container className="selectedGrid">
             {
                 mix.map(item =>
-                <Grid item key={item.data.id}>
-                    <SelectedCard id={item.data.id} name={item.data.name} artist={!item.data.artist ? null : item.data.artist} img={item.data.img} removeFromMix={removeFromMix}/>
+                <Grid item key={item.id}>
+                    <SelectedCard id={item.id} name={item.name} artist={!item.artist ? null : item.artist} img={item.img} removeFromMix={removeFromMix}/>
                 </Grid>)
             }
             </Grid>

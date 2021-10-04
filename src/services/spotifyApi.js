@@ -60,9 +60,9 @@ const recommend = async (mix) => {
 
     mix.forEach(item => {
         if(item.type === "song"){
-            songs.push(item.data.id)
+            songs.push(item.id)
         }else{
-            artists.push(item.data.id)
+            artists.push(item.id)
         }
     })
 

@@ -55,7 +55,7 @@ const Form = () => {
   }
 
   return (
-      <form className="form" onSubmit={(e) => e.preventDefault()}>
+      <div className="form">
         <TextField InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -64,7 +64,7 @@ const Form = () => {
         ),
       }} onChange={(e) => handleSearch(e.target.value)} name="search" label="search songs / artists" variant="filled" required/>
         {loading ? <CircularProgress/> : null }
-      </form>
+      </div>
   )
 }
 

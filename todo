@@ -1,0 +1,13 @@
+dev -
+refactor services, handle errors better
+
+minor -
+1. ui fix, padding and font adjustments
+2. cover art
+3. the cards need some improvement
+4. fill the lists with some info, shit looks empty
+5. optional (remarks on song taste)
+
+major -
+1. add to the playlist option
+2. backend to keep tokens safe

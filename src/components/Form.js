@@ -31,6 +31,7 @@ const Form = () => {
         return
       }
 
+      console.log("from form " , res)
       // setting songs
       let allSongs = itemArray(res.tracks.items, "song")
 

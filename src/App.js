@@ -19,9 +19,12 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    spotifyService.init().then(res => {
+    spotifyService.init()
+    .then(res => {
+      console.log("stopped")
       dispatch(actionSetFalse())
     })
+    
   }, [dispatch])
 
   return (

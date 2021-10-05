@@ -15,11 +15,13 @@ const SelectedCard = ({id, name, artist, img, removeFromMix}) => {
   
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flex: '1 0 auto' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-              <IconButton onClick={() => removeFromMix(id)}>
-                <DeleteIcon>remove</DeleteIcon>
-              </IconButton>
-            </Box>
+          
+              <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+                <IconButton onClick={() => removeFromMix(id)}>
+                  <DeleteIcon>remove</DeleteIcon>
+                </IconButton>
+              </Box>
+
               <Typography className="cardName" component="div" variant="h6">
                 {name}
               </Typography>
@@ -27,10 +29,10 @@ const SelectedCard = ({id, name, artist, img, removeFromMix}) => {
               <Typography variant="subtitle1" color="text.secondary" component="div">
                 {artist}
               </Typography>
-            </CardContent>
-            
-          </Box>
           
+            </CardContent>
+          </Box>
+
     </Card>)
 }
 

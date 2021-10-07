@@ -4,9 +4,6 @@ import { useDispatch } from 'react-redux'
 
 import spotifyService from "./services/spotifyApi"
 
-import { Container } from "@mui/material";
-import { Paper } from "@mui/material";
-
 import Form from "./components/Form";
 import SearchResult from "./components/SearchResult";
 import Selected from "./components/Selected"
@@ -14,6 +11,7 @@ import Suggestions from "./components/Suggestions";
 import Notification from "./components/Notification"
 
 import { actionSetFalse } from "./reducers/loading";
+import Greeter from "./components/Greeter";
 
 const App = () => {
   const dispatch = useDispatch()
@@ -28,20 +26,19 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <Container className="megaContainer">
-      <Notification className="notification"/>
-      <Form /> 
+    <div className="megaContainer">
+      <div className="subContainer">
+        <Notification className="notification"/>
+        <Greeter/>
+        <Form /> 
 
-      <Paper className="searchComponentContainer">
-          <Selected />
-      </Paper>
+        <Selected />
 
-      <Paper>
-          <SearchResult/>
-      </Paper>         
+        <SearchResult />
 
-      <Suggestions />
-    </Container>
+        <Suggestions />
+      </div>
+    </div>
   );
 }
 

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
 
 html, body{
     margin: 0%;
@@ -9,7 +10,7 @@ html, body{
 
 html {
     overflow-x: initial !important;
-    background: url("https://unsplash.com/photos/DrVRPxb0UDU/download?force=true&w=1920") no-repeat center center fixed; 
+    background: url("https://unsplash.com/photos/yHncaZledpA/download?force=true&w=1920") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -17,7 +18,7 @@ html {
 }
 
 .boldText{
-    font-family: 'Signika', sans-serif;
+    font-family: 'Work Sans', sans-serif;
 }
 
 .form {
@@ -40,15 +41,22 @@ html {
 }
 
 .suggestionsText{
-    margin-top: 50px;
+    color: white;
+    padding: 20px;
+    padding-top: 40px;
+}
+
+.subSuggestionText{
+    color: #6d6d6dd3;
+}
+
+.loadingGif{
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.selectedPanel{
-    visibility: "hidden";
-}
-
 .searchComponentContainer{
+    max-width: 70%;
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -60,9 +68,103 @@ html {
     justify-content: space-evenly;
     align-items: flex-start;
     gap: 30px;
-    padding: 10px;
+    padding: 20px;
 }
 
 .megaContainer{
-    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subContainer{
+    margin-top: 5vw;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.greeter{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+}
+
+.greeterText {
+    width: 70%;
+    font-size:  70px;
+    text-align: center;
+}
+
+.greeterTextSub{
+    text-align: center;
+    color: #fcfcfcd3;
+}
+
+.formInput{
+    padding-left: 20px;
+    width: 400px;
+    height: 35px;
+    font-size: 17px;
+    border-radius: 10px;
+    border: none;
+}
+
+.formInput:focus{
+    outline: none !important;
+    box-shadow: 0 0 10px #c8a6d1;
+}
+
+.playlist{
+    max-width: 70%;
+}
+
+.form{
+    margin-top: 40px;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .greeter{
+        width: 90%;
+    }
+
+    .greeterText {
+        font-size:  40px;
+    }
+
+    .greeterTextSub{
+        font-size:  30px;
+    }
+
+    .formInput{
+        width: 100%;
+        height: 35px;
+        font-size: 15px;
+        border-radius: 10px;
+        border: none;
+    }
+    
+    .subContainer{
+        margin-top: 5vw;
+        margin-bottom: 5vw;
+        width: 100vw;
+    }
+    
+    .searchComponentContainer{
+        max-width: 94%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+
+    .playlist{
+        max-width: 90%;
+    }
+
 }

@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { TextField } from "@mui/material";
-import CircularProgress from '@mui/material/CircularProgress';
-import InputAdornment from '@mui/material/InputAdornment';
-import SearchIcon from '@mui/icons-material/Search';
 
 import spotifyService from "../services/spotifyApi"
 
@@ -14,10 +10,9 @@ import { actionSetTrue, actionSetFalse } from "../reducers/loading"
 
 import { itemArray } from "../utils/utils";
 
-const Form = () => {
+const SearchBar = () => {
   const [timerID, setTimerID] = useState(null)
   const search = useSelector(state => state.search)
-  const loading = useSelector(state => state.loading)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -57,17 +52,12 @@ const Form = () => {
 
   return (
       <div className="form">
-        <TextField InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        ),
-      }} onChange={(e) => handleSearch(e.target.value)} name="search" label="search songs / artists" variant="filled" required/>
-        {loading ? <CircularProgress/> : null }
+        <input 
+        placeholder="search"
+        className="formInput" onChange={(e) => handleSearch(e.target.value)} name="search" required/>
       </div>
   )
 }
 
-export default Form;
+export default SearchBar;
   

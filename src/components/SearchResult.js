@@ -1,12 +1,15 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Box, Tabs, AppBar, Tab } from "@mui/material"
+import { Tabs, AppBar, Tab, CircularProgress } from "@mui/material"
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import ListItems from "./ListItems";
 
 import { notify } from "../reducers/notification";
 import { actionResetResults } from "../reducers/results";
 import { addMix } from "../reducers/mix";
+import { Paper } from "@mui/material";
 
 const SearchResult = () => {
     const [tab, setTab] = useState(0);
@@ -18,8 +21,16 @@ const SearchResult = () => {
     let songs = useSelector(state => state.songs)
     let artists = useSelector(state => state.artists)
     let loading = useSelector(state => state.loading)
+    
+    const darkTheme = createTheme({
+      palette: {
+        mode: 'dark',
+      },
+    });
 
-    if(loading || !search){
+    if(loading){
+        return <CircularProgress className="loadingGif"/>
+    }if(!loading && !search){
       return null
     }else if(songs.length === 0){
       return "not found"
@@ -43,24 +54,28 @@ const SearchResult = () => {
       }
     })
 
-    return (
-      <Box className="searchComponent">
-        <AppBar position="static" color="default">
-            <Tabs
-              value={tab}
-              onChange={(e, val) => setTab(val)}  
-            >
-              <Tab label="tracks"/>
-              <Tab label="artists"/>
-            </Tabs>
-        </AppBar>
 
-        {tab === 0 ? 
-        <ListItems items={songs} addtoMix={addtoMix} className="grid"/>
-        : <ListItems items={artists} addtoMix={addtoMix} className="grid"/>}
-        
-     
-      </Box> 
+    return (
+      <ThemeProvider theme={darkTheme}>
+        <Paper className="searchComponentContainer">
+          <div className="searchComponent">
+            <AppBar position="static" color="default">
+                <Tabs
+                  value={tab}
+                  onChange={(e, val) => setTab(val)}  
+                >
+                  <Tab label="tracks"/>
+                  <Tab label="artists"/>
+                </Tabs>
+            </AppBar>
+
+            {tab === 0 ? 
+            <ListItems items={songs} addtoMix={addtoMix} className="grid"/>
+            : <ListItems items={artists} addtoMix={addtoMix} className="grid"/>}
+            
+          </div> 
+        </Paper>
+      </ThemeProvider>
     )
 }
 

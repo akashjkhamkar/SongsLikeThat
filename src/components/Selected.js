@@ -3,7 +3,9 @@ import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import SelectedCard from "./SelectedCard"
 import Typography from '@mui/material/Typography';
 import spotifyService from "../services/spotifyApi"
-
+import { Paper } from "@mui/material";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux'
 import { songsinitAction } from "../reducers/songs"
 import { artistinitAction } from "../reducers/artists"
@@ -22,6 +24,12 @@ const Selected = () => {
         return null
     }
 
+    const darkTheme = createTheme({
+        palette: {
+          mode: 'dark',
+        },
+    });
+  
     const removeFromMix = (id) => {
         const obj = mix.find(e => e.id === id)
     
@@ -46,26 +54,31 @@ const Selected = () => {
 
 
     return (
-        <div className="selectedDiv">
-            <Typography variant="h3">
-                <span className="boldText">Selected songs and artists</span>
-                </Typography>
-            
-            <Grid spacing={3} container className="selectedGrid">
-            {
-                mix.map(item =>
-                <Grid item key={item.id}>
-                    <SelectedCard id={item.id} name={item.name} artist={!item.artist ? null : item.artist} img={item.img} removeFromMix={removeFromMix}/>
-                </Grid>)
-            }
-            </Grid>
+    <ThemeProvider theme={darkTheme}>
+        <Paper className="searchComponentContainer">
+            <div className="selectedDiv">
+                <Typography variant="h3">
+                    <span className="boldText">Selected</span>
+                    </Typography>
+                
+                <Grid spacing={1} container className="selectedGrid">
+                {
+                    mix.map(item =>
+                    <Grid item key={item.id}>
+                        <SelectedCard id={item.id} name={item.name} artist={!item.artist ? null : item.artist} img={item.img} removeFromMix={removeFromMix}/>
+                    </Grid>)
+                }
+                </Grid>
 
-            <Button className="generate" variant="contained" onClick={generate}>
-                Generate
-                <QueueMusicIcon/>
-            </Button>
-            
-        </div>
+                <Button className="generate" variant="contained" onClick={generate}>
+                    Generate
+                    <QueueMusicIcon/>
+                </Button>
+                
+            </div>
+        </Paper>
+    </ThemeProvider>
+
     )
 }
 

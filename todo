@@ -1,5 +1,4 @@
 dev -
-refactor services, handle errors better
 
 minor -
 1. ui fix, padding and font adjustments

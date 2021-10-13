@@ -33,7 +33,7 @@ const Suggestions = () => {
             <div className="suggestionsText">
                 <Typography component="div" variant="h3"><span className="boldText">Playlist made for you</span></Typography>
                 <Typography className="subSuggestionText" component="div" variant="h5">( Based on {mix.map(e=>e.name).join(',')})</Typography>
-                <Button onClick={spotifyService.login}>add to spotify</Button>
+                <Button variant="contained" onClick={spotifyService.login}>add to spotify</Button>
             </div>
 
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>

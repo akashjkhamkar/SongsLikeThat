@@ -1,4 +1,3 @@
-import { RequestPage } from "@mui/icons-material"
 import axios from "axios"
 import QueryString from "qs"
 
@@ -13,7 +12,8 @@ let userRefreshToken = null
 let code = null
 let playlistId = null
 
-const redirectUrl = "http://localhost:3000/login"
+const redirectUrl = window.location.origin + "/login";
+console.log(redirectUrl)
 const searchUrl = (query) => `https://api.spotify.com/v1/search?q=${query}&type=track%2Cartist&market=US&limit=15`;
 
 const setCode = (c) => {
@@ -99,6 +99,7 @@ const userDetails = () => {
 }
 
 const getUserToken = () => {
+    console.log("getting user token")
     const request = axios({
         method: 'post',
         url: `https://accounts.spotify.com/api/token`,

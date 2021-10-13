@@ -13,23 +13,18 @@ let code = null
 let playlistId = null
 
 const redirectUrl = window.location.origin + "/login";
-console.log(redirectUrl)
 const searchUrl = (query) => `https://api.spotify.com/v1/search?q=${query}&type=track%2Cartist&market=US&limit=15`;
 
 const addToPlaylist = (songs) => {
     const tracks = songs.map(song => "spotify:track:" + song.id).join(",")
     const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${encodeURIComponent(tracks)}`
-    const request = axios({
+    return axios({
         method: 'post',
         url,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Bearer ${userToken}`
         }
-    })
-
-    return request.then(res => {
-        console.log(res);
     })
 } 
 
@@ -51,7 +46,6 @@ const createPlaylist = (userid, name) => {
     })
 
     return request.then(res => {
-        console.log(res)
         playlistId = res.data.id
     })
 }
@@ -63,7 +57,7 @@ const login = () => {
 }
 
 const refreshUserToken = () => {
-    const request = axios({
+    return axios({
         method: 'post',
         url: 'https://accounts.spotify.com/api/token',
         data: QueryString.stringify({
@@ -74,10 +68,6 @@ const refreshUserToken = () => {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
         }
-    })
-
-    return request.then(res => {
-        console.log("refreshed token" , res);
     })
 }
 
@@ -90,13 +80,15 @@ const userDetails = (token) => {
     }})
 
     return request.then(res => {
-        console.log("2. fetched userData", res.data);
         return res.data;
+    })
+    .catch(e => {
+        alert(e.response.data + "/ dev doesnt like you , buy him a chocolate of something")
+        window.location = "/"
     })
 }
 
 const getUserToken = () => {
-    console.log("getting user token")
     const request = axios({
         method: 'post',
         url: `https://accounts.spotify.com/api/token`,
@@ -114,7 +106,6 @@ const getUserToken = () => {
     return request.then(res => {
         userToken = res.data.access_token
         userRefreshToken = res.data.refresh_token
-        console.log("1. fetched user token", userToken)
     }).catch(e => {
         alert("something went wrong, contact the dev")
         return e
@@ -136,7 +127,6 @@ const init = () => {
     })
 
     return request.then(res => {
-        console.log("fetched")
         token = res.data.access_token
         return res
     }).catch(e => {
@@ -149,7 +139,6 @@ const search = (query) => {
     const originalQuery = query
     query = encodeURIComponent(query.trim())
     if(!token){
-        console.log("no token")
         return
     }
 
@@ -161,9 +150,7 @@ const search = (query) => {
 
     return request.then(res => res.data)
     .catch(async e => {
-        console.log(e)
         if(e.response.data.error.message === "The access token expired"){
-            console.log("getting token again, inside the block")
             await init()
             return await search(originalQuery)
         }else{
@@ -174,7 +161,6 @@ const search = (query) => {
 
 const recommend = async (mix) => {
     if(!token){
-        console.log("no token")
         return
     }
 
@@ -211,7 +197,6 @@ const recommend = async (mix) => {
     return res.then(res => res.data)
     .catch(async e => {
         if(e.response.data.error.message === "The access token expired"){
-            console.log("getting token again, inside the block")
             await init()
             return await recommend(mix)
         }else{

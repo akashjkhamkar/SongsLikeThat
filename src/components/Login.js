@@ -1,5 +1,5 @@
 import { useLocation, useHistory, Redirect } from "react-router-dom"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import spotifyService from "../services/spotifyApi"
 import { setUser } from "../reducers/user"
 import { notify } from "../reducers/notification";
@@ -9,12 +9,14 @@ const Login = () => {
 
     const token = hash.substring(13, accessString);
     console.log(token)
+
+    const loading = useSelector(state => state.loading)
     const history = useHistory();
     const dispatch = useDispatch();
     const playlist = JSON.parse(localStorage.getItem("playlist"))
 
-    if(!token){
-        return <Redirect to="/"/>
+    if(!token || !loading){
+        return null
     }
 
     spotifyService.userDetails(token)

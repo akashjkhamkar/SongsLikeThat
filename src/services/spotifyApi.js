@@ -16,10 +16,6 @@ const redirectUrl = window.location.origin + "/login";
 console.log(redirectUrl)
 const searchUrl = (query) => `https://api.spotify.com/v1/search?q=${query}&type=track%2Cartist&market=US&limit=15`;
 
-const setCode = (c) => {
-    code = c;
-}
-
 const addToPlaylist = (songs) => {
     const tracks = songs.map(song => "spotify:track:" + song.id).join(",")
     const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${encodeURIComponent(tracks)}`
@@ -62,7 +58,7 @@ const createPlaylist = (userid, name) => {
 
 const login = () => {
     var scopes = 'playlist-modify-private';
-    const loginUrl = `https://accounts.spotify.com/en/authorize?response_type=code&client_id=28e7d1cab8f8410fa52de2cdf79ee154&redirect_uri=${encodeURIComponent(redirectUrl.trim())}&scope=${encodeURIComponent(scopes)}&show_dialog=true`
+    const loginUrl = `https://accounts.spotify.com/en/authorize?response_type=token&client_id=28e7d1cab8f8410fa52de2cdf79ee154&redirect_uri=${encodeURIComponent(redirectUrl.trim())}&scope=${encodeURIComponent(scopes)}&show_dialog=true`
     window.location = loginUrl;
 }
 
@@ -85,7 +81,8 @@ const refreshUserToken = () => {
     })
 }
 
-const userDetails = () => {
+const userDetails = (token) => {
+    userToken = token
     const url = "https://api.spotify.com/v1/me";
     const request = axios.get(url,{ 
         "headers":{
@@ -223,5 +220,5 @@ const recommend = async (mix) => {
     })
 }
 
-const obj = { search, init, recommend, login, setCode, getUserToken, userDetails, refreshUserToken, createPlaylist, addToPlaylist }
+const obj = { search, init, recommend, login, getUserToken, userDetails, refreshUserToken, createPlaylist, addToPlaylist }
 export default obj

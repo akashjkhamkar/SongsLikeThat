@@ -4,19 +4,20 @@ import spotifyService from "../services/spotifyApi"
 import { setUser } from "../reducers/user"
 import { notify } from "../reducers/notification";
 const Login = () => {
-    const code = new URLSearchParams(useLocation().search).get("code");
+    var hash = window.location.hash.substring(1);
+    var accessString = hash.indexOf("&");
+
+    const token = hash.substring(13, accessString);
+    console.log(token)
     const history = useHistory();
     const dispatch = useDispatch();
     const playlist = JSON.parse(localStorage.getItem("playlist"))
 
-    if(!code){
+    if(!token){
         return <Redirect to="/"/>
     }
 
-    spotifyService.setCode(code)
-    
-    spotifyService.getUserToken()
-    .then(() => spotifyService.userDetails())
+    spotifyService.userDetails(token)
     .then(userData => {
         console.log("dispatching userdata")
         dispatch(setUser(userData));

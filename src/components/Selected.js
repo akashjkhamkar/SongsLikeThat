@@ -48,6 +48,15 @@ const Selected = () => {
     const generate = async () => {
         const res = await spotifyService.recommend(mix)
         const allSongs = itemArray(res.tracks, "song")
+        console.log(allSongs)
+
+        const playlist = {
+            songs: allSongs,
+            name: mix.map(e => e.name).join(',') + " mix"
+        }
+        
+        localStorage.setItem('playlist', JSON.stringify(playlist))
+
         dispatch(actionUpdateResults(allSongs))
         document.querySelector(".playlist").scrollIntoView({ behavior: 'smooth' })
     }

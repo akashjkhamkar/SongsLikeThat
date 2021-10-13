@@ -27,27 +27,31 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <Switch>
-      <Route path="/login">
-        <Login />
-      </Route>
-
-      <Route path="/">
-        <div className="megaContainer">
-          <div className="subContainer">
-            <Notification className="notification"/>
-            <Greeter/>
-            <Form /> 
-
-            <Selected />
-
-            <SearchResult />
-
-            <Suggestions />
+    <div className="megaContainer">
+      <div className="subContainer">
+        <Notification className="notification"/>
+        <Switch>
+          <Route path="/login">
+            <Login />
+            <div className="greeter">
+              <h1 className="greeterText boldText">adding to playlist . . .</h1>
           </div>
-        </div>
-      </Route>
-    </Switch>
+  
+          </Route>
+
+          <Route path="/">
+                <Greeter/>
+                <Form /> 
+
+                <Selected />
+
+                <SearchResult />
+
+                <Suggestions />
+          </Route>
+        </Switch>
+      </div>
+  </div>
   );
 }
 

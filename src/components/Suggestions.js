@@ -9,7 +9,7 @@ import Avatar from '@mui/material/Avatar';
 import ListItemButton from '@mui/material/ListItemButton';
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
-import { Paper } from "@mui/material";
+import { Paper, Button } from "@mui/material";
 
 import spotifyService from "../services/spotifyApi"
 
@@ -33,7 +33,7 @@ const Suggestions = () => {
             <div className="suggestionsText">
                 <Typography component="div" variant="h3"><span className="boldText">Playlist made for you</span></Typography>
                 <Typography className="subSuggestionText" component="div" variant="h5">( Based on {mix.map(e=>e.name).join(',')})</Typography>
-                <button onClick={spotifyService.login}>login</button>
+                <Button onClick={spotifyService.login}>add to spotify</Button>
             </div>
 
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>

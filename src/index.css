@@ -10,7 +10,7 @@ html, body{
 
 html {
     overflow-x: initial !important;
-    background: url("https://unsplash.com/photos/yHncaZledpA/download?force=true&w=1920") no-repeat center center fixed; 
+    background: url("./background_northernLights.jpg") no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

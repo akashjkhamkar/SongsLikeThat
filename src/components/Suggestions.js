@@ -11,6 +11,8 @@ import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 import { Paper } from "@mui/material";
 
+import spotifyService from "../services/spotifyApi"
+
 const Suggestions = () => {
     const mix = useSelector(state => state.mix)
     const results = useSelector(state => state.results)
@@ -31,6 +33,7 @@ const Suggestions = () => {
             <div className="suggestionsText">
                 <Typography component="div" variant="h3"><span className="boldText">Playlist made for you</span></Typography>
                 <Typography className="subSuggestionText" component="div" variant="h5">( Based on {mix.map(e=>e.name).join(',')})</Typography>
+                <button onClick={spotifyService.login}>login</button>
             </div>
 
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>

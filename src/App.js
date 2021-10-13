@@ -1,9 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux'
-
+import { Switch, Route } from 'react-router-dom'
 import spotifyService from "./services/spotifyApi"
 
+import Login from "./components/Login";
 import Form from "./components/Form";
 import SearchResult from "./components/SearchResult";
 import Selected from "./components/Selected"
@@ -26,19 +27,27 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <div className="megaContainer">
-      <div className="subContainer">
-        <Notification className="notification"/>
-        <Greeter/>
-        <Form /> 
+    <Switch>
+      <Route path="/login">
+        <Login />
+      </Route>
 
-        <Selected />
+      <Route path="/">
+        <div className="megaContainer">
+          <div className="subContainer">
+            <Notification className="notification"/>
+            <Greeter/>
+            <Form /> 
 
-        <SearchResult />
+            <Selected />
 
-        <Suggestions />
-      </div>
-    </div>
+            <SearchResult />
+
+            <Suggestions />
+          </div>
+        </div>
+      </Route>
+    </Switch>
   );
 }
 

@@ -7,6 +7,7 @@ import LoadingReducer from "./reducers/loading"
 import SearchReducer from "./reducers/search"
 import ResultsReducer from "./reducers/results"
 import NotificationReducer from "./reducers/notification"
+import UserReducer from "./reducers/user"
 
 const megaReducer = combineReducers({
     songs: SongsReducer,
@@ -15,7 +16,8 @@ const megaReducer = combineReducers({
     loading: LoadingReducer,
     search: SearchReducer,
     results: ResultsReducer,
-    notification: NotificationReducer
+    notification: NotificationReducer,
+    user: UserReducer
 })
 
 const store = createStore(megaReducer)

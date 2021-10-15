@@ -12,6 +12,7 @@ import { itemArray } from "../utils/utils";
 
 const SearchBar = () => {
   const [timerID, setTimerID] = useState(null)
+  const [searchLocal, setsearchLocal] = useState("")
   const search = useSelector(state => state.search)
   const dispatch = useDispatch()
 
@@ -39,7 +40,8 @@ const SearchBar = () => {
 
   }, [search, dispatch])
 
-  const handleSearch = (query) => {
+  const doSearch = (query) => {
+    console.log("searching ", query)
     if(timerID){
       clearTimeout(timerID)
     }
@@ -49,11 +51,22 @@ const SearchBar = () => {
     dispatch(actionSetTrue());
   }
 
+  const handleSearch = (e, query) => {
+    e.preventDefault()
+    setsearchLocal(query)
+    doSearch(query)
+  }
+
   return (
-      <form className="form" onSubmit={e => {e.preventDefault();console.log("hit enter")}}>
-        <input 
+      <form className="form" onSubmit={e => {
+          e.preventDefault();}}>
+        
+        <input
+        value={searchLocal} 
         placeholder="search"
-        className="formInput" onChange={(e) => handleSearch(e.target.value)} name="search" required/>
+        className="formInput" onChange={(e) => handleSearch(e, e.target.value)} name="search" required/>
+      
+        <button>search</button>
       </form>
   )
 }

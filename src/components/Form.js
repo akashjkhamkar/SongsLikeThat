@@ -57,17 +57,22 @@ const SearchBar = () => {
     doSearch(query)
   }
 
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
+
   return (
-      <form className="form" onSubmit={e => {
-          e.preventDefault();}}>
+      <div className="form">
         
         <input
         value={searchLocal} 
         placeholder="search"
-        className="formInput" onChange={(e) => handleSearch(e, e.target.value)} name="search" required/>
+        className="formInput" 
+        onKeyUp={(e) => e.keyCode === 13 ? e.target.blur() : null}
+        onChange={(e) => handleSearch(e, e.target.value)} name="search" required/>
       
         <button>search</button>
-      </form>
+      </div>
   )
 }
 

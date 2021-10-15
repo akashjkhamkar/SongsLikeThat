@@ -50,11 +50,11 @@ const SearchBar = () => {
   }
 
   return (
-      <div className="form">
+      <form className="form" onSubmit={e => e.preventDefault()}>
         <input 
         placeholder="search"
         className="formInput" onChange={(e) => handleSearch(e.target.value)} name="search" required/>
-      </div>
+      </form>
   )
 }
 

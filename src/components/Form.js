@@ -41,12 +41,11 @@ const SearchBar = () => {
   }, [search, dispatch])
 
   const doSearch = (query) => {
-    console.log("searching ", query)
     if(timerID){
       clearTimeout(timerID)
     }
 
-    const id = setTimeout(() => {dispatch(updateSearch(query))}, 700)
+    const id = setTimeout(() => {dispatch(updateSearch(query))}, 500)
     setTimerID(id)
     dispatch(actionSetTrue());
   }

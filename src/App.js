@@ -20,11 +20,12 @@ const App = () => {
 
   useEffect(() => {
     spotifyService.init()
-    .then(() => {
+    .then((res) => {
+      console.log("init done ! " + res)
       dispatch(actionSetFalse())
     })
     
-  }, [dispatch])
+  }, [])
 
   return (
     <div className="megaContainer">

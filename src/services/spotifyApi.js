@@ -67,7 +67,7 @@ const userDetails = (token) => {
     })
     .catch(e => {
         console.log("getting details went wrong")
-        alert("something went wrong")
+        alert("something went wrong, refresh the page")
         window.location = "/"
     })
 }
@@ -87,10 +87,10 @@ const init = () => {
 
     return request.then(res => {
         token = res.data.access_token
-        return res
+        return token
     }).catch(e => {
         console.log("init went wrong")
-        alert("something went wrong")
+        alert("something went wrong, refresh the page")
         return e
     })
 }
@@ -98,9 +98,6 @@ const init = () => {
 const search = (query) => {
     const originalQuery = query
     query = encodeURIComponent(query.trim())
-    if(!token){
-        return
-    }
 
     const request = axios.get(searchUrl(query), {
         "headers":{
@@ -110,8 +107,11 @@ const search = (query) => {
 
     return request.then(res => res.data)
     .catch(async e => {
-        console.log("searching failed");
-        if(e.response.data.error.message === "The access token expired"){
+        const msg = e.response.data.error.message;
+        console.log(msg)
+        if(msg === "The access token expired"
+        || msg === "No token provided"
+        || msg === "Invalid access token"){
             await init()
             return await search(originalQuery)
         }else{
@@ -162,7 +162,7 @@ const recommend = async (mix) => {
             await init()
             return await recommend(mix)
         }else{
-            alert("something went wrong !")
+            alert("something went wrong, refresh the page")
         }
     })
 }

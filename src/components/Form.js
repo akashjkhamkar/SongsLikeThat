@@ -50,7 +50,7 @@ const SearchBar = () => {
   }
 
   return (
-      <form className="form" onSubmit={e => e.preventDefault()}>
+      <form className="form" onSubmit={e => {e.preventDefault();console.log("hit enter")}}>
         <input 
         placeholder="search"
         className="formInput" onChange={(e) => handleSearch(e.target.value)} name="search" required/>

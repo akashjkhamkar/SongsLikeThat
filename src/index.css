@@ -4,7 +4,7 @@
 html, body{
     margin: 0%;
     padding: 0%;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
 }
 
@@ -36,10 +36,6 @@ html {
     overflow:hidden;
 }
 
-.searchButton{
-    background: black;
-}
-
 .suggestionsText{
     color: white;
     padding: 20px;
@@ -48,12 +44,13 @@ html {
 
 .subSuggestionText{
     color: #6d6d6dd3;
+    padding-bottom: 10px;
 }
 
-.loadingGif{
+/* .loadingGif{
     margin-top: 20px;
     margin-bottom: 20px;
-}
+} */
 
 .searchComponentContainer{
     max-width: 70%;
@@ -71,12 +68,28 @@ html {
     padding: 20px;
 }
 
+.contact{
+    min-height: 5vh;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;  
+    align-items: center;
+    font-family: 'Work Sans', sans-serif;
+}
+
 .megaContainer{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+}
+
+.subMegaContainer{
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .subContainer{
@@ -136,10 +149,13 @@ html {
 
     .greeterText {
         font-size:  40px;
+        text-align: start;
     }
 
     .greeterTextSub{
-        font-size:  30px;
+        padding: 20px;
+        font-size: 15px;
+        color: #eeeeee;
     }
 
     .formInput{
@@ -162,9 +178,11 @@ html {
         margin-bottom: 20px;
     }
 
-
     .playlist{
         max-width: 90%;
     }
 
+    .madeForYou{
+        font-size: 40px;
+    }
 }

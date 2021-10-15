@@ -1,4 +1,4 @@
-import { useLocation, useHistory, Redirect } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import spotifyService from "../services/spotifyApi"
 import { setUser } from "../reducers/user"
@@ -8,7 +8,6 @@ const Login = () => {
     var accessString = hash.indexOf("&");
 
     const token = hash.substring(13, accessString);
-    console.log(token)
 
     const loading = useSelector(state => state.loading)
     const history = useHistory();
@@ -21,15 +20,10 @@ const Login = () => {
 
     spotifyService.userDetails(token)
     .then(userData => {
-        console.log("dispatching userdata")
         dispatch(setUser(userData));
-
-        // adding songs to users ac
-        console.log(playlist);
         return spotifyService.createPlaylist(userData.id, playlist.name)
     })
     .then(() => {
-        console.log("playlist is created hopefully")
         return spotifyService.addToPlaylist(playlist.songs)
     })
     .then(() => {

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Tabs, AppBar, Tab, CircularProgress } from "@mui/material"
+import { Tabs, AppBar, Tab } from "@mui/material"
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 import ListItems from "./ListItems";
@@ -29,7 +29,7 @@ const SearchResult = () => {
     });
 
     if(loading){
-        return <CircularProgress className="loadingGif"/>
+        return <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
     }if(!loading && !search){
       return null
     }else if(songs.length === 0){

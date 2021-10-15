@@ -8,8 +8,6 @@ let token = null
 
 // user creds
 let userToken = null
-let userRefreshToken = null
-let code = null
 let playlistId = null
 
 const redirectUrl = window.location.origin + "/login";
@@ -56,21 +54,6 @@ const login = () => {
     window.location = loginUrl;
 }
 
-const refreshUserToken = () => {
-    return axios({
-        method: 'post',
-        url: 'https://accounts.spotify.com/api/token',
-        data: QueryString.stringify({
-            grant_type: "refresh_token",
-            refresh_token: userRefreshToken
-        }),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
-        }
-    })
-}
-
 const userDetails = (token) => {
     userToken = token
     const url = "https://api.spotify.com/v1/me";
@@ -83,34 +66,10 @@ const userDetails = (token) => {
         return res.data;
     })
     .catch(e => {
-        alert(e.response.data + "/ dev doesnt like you , buy him a chocolate of something")
+        console.log("getting details went wrong")
+        alert("something went wrong")
         window.location = "/"
     })
-}
-
-const getUserToken = () => {
-    const request = axios({
-        method: 'post',
-        url: `https://accounts.spotify.com/api/token`,
-        data: QueryString.stringify({
-            grant_type: "authorization_code",
-            code,
-            redirect_uri: redirectUrl
-        }),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
-        }
-    })
-
-    return request.then(res => {
-        userToken = res.data.access_token
-        userRefreshToken = res.data.refresh_token
-    }).catch(e => {
-        alert("something went wrong, contact the dev")
-        return e
-    })
-
 }
 
 const init = () => {
@@ -130,7 +89,8 @@ const init = () => {
         token = res.data.access_token
         return res
     }).catch(e => {
-        alert("something went wrong, contact the dev")
+        console.log("init went wrong")
+        alert("something went wrong")
         return e
     })
 }
@@ -150,11 +110,13 @@ const search = (query) => {
 
     return request.then(res => res.data)
     .catch(async e => {
+        console.log("searching failed");
         if(e.response.data.error.message === "The access token expired"){
             await init()
             return await search(originalQuery)
         }else{
-            alert("something went wrong, try you luck by refreshing or contact the dev")
+            console.log("searching failed");
+            alert("something went wrong, refresh the page")
         }
     })
 }
@@ -205,5 +167,5 @@ const recommend = async (mix) => {
     })
 }
 
-const obj = { search, init, recommend, login, getUserToken, userDetails, refreshUserToken, createPlaylist, addToPlaylist }
+const obj = { search, init, recommend, login, userDetails, createPlaylist, addToPlaylist }
 export default obj

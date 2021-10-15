@@ -44,7 +44,7 @@ const SearchBar = () => {
       clearTimeout(timerID)
     }
 
-    const id = setTimeout(() => {dispatch(updateSearch(query))}, 500)
+    const id = setTimeout(() => {dispatch(updateSearch(query))}, 700)
     setTimerID(id)
     dispatch(actionSetTrue());
   }

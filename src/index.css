@@ -47,11 +47,6 @@ html {
     padding-bottom: 10px;
 }
 
-/* .loadingGif{
-    margin-top: 20px;
-    margin-bottom: 20px;
-} */
-
 .searchComponentContainer{
     max-width: 70%;
     display: flex;
@@ -117,6 +112,13 @@ html {
 .greeterTextSub{
     text-align: center;
     color: #fcfcfcd3;
+}
+
+.notFound{
+    color: white;
+    font-family: "work-sans";
+    font-size: 30px;
+    font-family: 'Work Sans', sans-serif;
 }
 
 .formInput{

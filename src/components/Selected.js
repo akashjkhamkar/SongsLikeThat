@@ -48,7 +48,6 @@ const Selected = () => {
     const generate = async () => {
         const res = await spotifyService.recommend(mix)
         const allSongs = itemArray(res.tracks, "song")
-        console.log(allSongs)
 
         const playlist = {
             songs: allSongs,

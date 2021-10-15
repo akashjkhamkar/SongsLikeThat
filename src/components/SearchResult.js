@@ -28,12 +28,12 @@ const SearchResult = () => {
       },
     });
 
-    if(loading){
-        return <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-    }if(!loading && !search){
-      return null
+    if(!search){
+        return null  
+    }else if(loading){
+      return <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
     }else if(songs.length === 0){
-      return "not found"
+      return <h3 className="notFound">not found :(</h3>
     }
 
     const addtoMix = (id, type) => {

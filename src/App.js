@@ -13,6 +13,7 @@ import Suggestions from "./components/Suggestions";
 import { actionSetFalse } from "./reducers/loading";
 import Greeter from "./components/Greeter";
 import Contact from "./components/Contact";
+import Notification from "./components/Notification"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -28,13 +29,15 @@ const App = () => {
   return (
     <div className="megaContainer">
       <Contact/>
+      <Notification className="notification"/>
       <div className="subMegaContainer">
         <div className="subContainer">
           <Switch>
             <Route path="/login">
               <Login />
               <div className="greeter">
-                <h1 className="greeterText boldText">adding to playlist . . .</h1>
+                <h1 className="greeterText boldText">adding to playlist </h1>
+                <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
               </div>
             </Route>
 

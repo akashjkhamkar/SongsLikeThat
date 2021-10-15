@@ -2,7 +2,6 @@ import { IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import Notification from "./Notification"
 
 const Contact = () => {
     return (
@@ -19,7 +18,6 @@ const Contact = () => {
                 <EmailIcon style={{fill: "white"}}></EmailIcon>
             </IconButton>
 
-            <Notification className="notification"/>
         </div>
     )
 }

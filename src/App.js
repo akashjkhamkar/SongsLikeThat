@@ -21,7 +21,6 @@ const App = () => {
   useEffect(() => {
     spotifyService.init()
     .then((res) => {
-      console.log("init done ! " + res)
       dispatch(actionSetFalse())
     })
     

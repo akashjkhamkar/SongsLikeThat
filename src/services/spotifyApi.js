@@ -1,9 +1,6 @@
 import axios from "axios"
-import QueryString from "qs"
 
 // dev creds
-const clientId = "28e7d1cab8f8410fa52de2cdf79ee154"
-const secret = "4595a1242a174cf3ae5deb9eeedf5391"
 let token = null
 
 // user creds
@@ -73,20 +70,9 @@ const userDetails = (token) => {
 }
 
 const init = () => {
-    const request = axios({
-        method: 'post',
-        url: 'https://accounts.spotify.com/api/token',
-        data: QueryString.stringify({
-            grant_type: "client_credentials"
-        }),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Authorization: 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
-        }
-    })
-
+    const request = axios.get("https://spotify-token-backend-nu.vercel.app/")
     return request.then(res => {
-        token = res.data.access_token
+        token = res.data.token
         return token
     }).catch(e => {
         console.log("init went wrong")

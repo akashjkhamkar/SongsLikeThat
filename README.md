@@ -1,7 +1,9 @@
 # Songs-like-that
 
 Give the Songs/ Artists that you like , 
+
 Discover new songs based on these seeds
+
 [live version](https://songs-like-that.vercel.app/)
 
 ## Setup
@@ -15,6 +17,7 @@ hence you will need to setup something similar if you are planning to deploy, al
 init() method in spotifyApi.js here on frontend.
  
 ## Stack
-React 
-Redux for state Management
+React & Redux
+
+
 Material Ui

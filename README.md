@@ -7,8 +7,6 @@ Discover new songs based on those seeds
 [live version](https://songs-like-that.vercel.app/)
 
 ![Screenshot1](/ss1.png)
-![Screenshot1](/ss2.png)
-![Screenshot1](/ss3.png)
 
 ## Setup
 You will require spotify api clientid and secret in order for app to work.

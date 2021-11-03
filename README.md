@@ -2,7 +2,7 @@
 
 Give the Songs/ Artists that you like , 
 
-Discover new songs based on these seeds
+Discover new songs based on those seeds
 
 [live version](https://songs-like-that.vercel.app/)
 
